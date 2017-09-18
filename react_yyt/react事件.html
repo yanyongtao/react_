@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/react.js" charset="utf-8"></script>
+    <script src="js/react-dom.js" charset="utf-8"></script>
+    <script src="js/browser.js" charset="utf-8"></script>
+    <script type="text/babel">
+
+        class Comp extends React.Component {
+            constructor(...arge) {
+                super(...arge); //超类、父类  必须先完成父类的构造工作，早能做自己的事
+                this.state={value:''};
+            }
+            fn(ev){
+                //alert(123);
+                //this.state.balue=123;
+                this.setState({
+                    value:ev.target.value
+                })
+            }
+            render(){
+                return <div>
+                <input type="text" onChange={this.fn.bind(this)}/>
+                <span>{this.state.value}</span>
+                </div>;
+            }
+        }
+        window.onload=function(){
+            var oDiv=document.getElementById('div1');
+            ReactDOM.render(
+                <Comp/>,
+                oDiv
+            )
+        }
+    </script>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>

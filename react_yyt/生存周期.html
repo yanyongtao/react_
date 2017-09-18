@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/react.js" charset="utf-8"></script>
+    <script src="js/react-dom.js" charset="utf-8"></script>
+    <script src="js/browser.js" charset="utf-8"></script>
+    <script type="text/babel">
+        class Comp extends React.Component{
+            constructor(...arge){
+                super(...arge);
+                this.state={h:0,m:0,s:0};
+                var this_=this;
+                setInterval(function(){
+                    this_.tick();
+                },1000)
+            }
+            componentWillMount(){
+                console.log('即将创建完成');
+                this.tick()
+            }
+            componentDidMount(){
+                console.log('刚刚创建完成');
+            }
+            componentWillUpdate(){
+                console.log('即将更新')
+            }
+            componentDidUpdate(){
+                console.log('刚更新完')
+            }
+            componentWillUnmount(){
+                console.log('即将销毁')
+            }
+            tick(){
+                var oDate=new Date();
+                this.setState({
+                    h:oDate.getHours(),
+                    m:oDate.getMinutes(),
+                    s:oDate.getSeconds()
+                })
+            }
+            render(){
+                return <div>
+                <span>{this.state.h}:</span>
+                <span>{this.state.m}:</span>
+                <span>{this.state.s}</span>
+                </div>;
+            }
+        }
+        window.onload=function() {
+            var oDiv=document.getElementById('div1');
+            var i=0;
+            document.onclick=function() {
+                i++;
+                if (i%2) {
+                    ReactDOM.render(
+                        <Comp/>,
+                        oDiv
+                    )
+                } else {
+                    ReactDOM.render(
+                        <div>qqq</div>,
+                        oDiv
+                    )
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>
