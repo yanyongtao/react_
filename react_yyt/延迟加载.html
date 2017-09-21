@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/react.js" charset="utf-8"></script>
+    <script src="js/react-dom.js" charset="utf-8"></script>
+    <script src="js/browser.js" charset="utf-8"></script>
+    <script src="js/jquery.js" charset="utf-8"></script>
+    <style media="screen">
+        img{
+            display: block;
+            margin: 50px;
+            width: 199px;
+            height: 204px;
+        }
+    </style>
+    <script type="text/babel">
+        class LazyLoad extends React.Component{
+            constructor(...args) {
+            super(...args);
+            this.aImagePath=this.props.imgs.split(',');
+                const this_=this;
+                window.onscroll=function () {
+                    var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+                    this_.refs['div1'].children
+                    // 接下来原生操作
+                }
+            }
+            render(){
+                var arr=[];
+                for (var i = 0; i < this.aImagePath.length; i++) {
+                    arr.push(<img key={i} data-src={'image/'+this.aImagePath[i]} alt="pic" />);
+                }
+                return <div ref="div1">{arr}</div>;
+            }
+        }
+        $(function() {
+            ReactDOM.render(
+                <LazyLoad imgs="image_1.jpg,image_2.jpg,image_3.jpg,image_4.jpg"/>,
+                $('yyt-view')[0]
+            )
+        })
+    </script>
+</head>
+<body>
+    <yyt-view></yyt-view>
+</body>
+</html>

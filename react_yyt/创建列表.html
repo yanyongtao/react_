@@ -9,7 +9,7 @@
     <script src="js/react-dom.js" charset="utf-8"></script>
     <script src="js/browser.js" charset="utf-8"></script>
     <script type="text/babel">
-        class Ttem extends React.Component {
+        class Item extends React.Component {
             constructor(...arge) {
                 super(...arge);
             }
@@ -18,23 +18,39 @@
             }
         }
         class List extends React.Component {
-            constructor(...arge) {
-                super(...arge);
+            constructor(...args) {
+                super(...args);
+                // this.arr=[12, 5, 8, 9];
+                this.state={arr:[12,5,8,9]}
+            }
+            fn(){
+                this.setState({
+                    arr:this.state.arr.concat([Math.random()])
+                });
             }
             render(){
-                var arr=[12,8,5,9];
+                // var arr=[12,8,5,9];
                 var result=[];
+                var arr=this.state.arr;
                 for (var i = 0; i < arr.length; i++) {
-                    result.push(<Item value={arr[i]}/>)
+                    result.push(<Item key={i} value={arr[i]}/>)
                 }
                 return <ul>
-                <Item/>
+                <input type="button" value='按钮' onClick={this.fn.bind(this)}/>
+                {result}
                 </ul>
             }
+        }
+        window.onload=function() {
+            var oDiv=document.getElementById('div1');
+            ReactDOM.render(
+                <List/>,
+                oDiv
+            )
         }
     </script>
 </head>
 <body>
-
+<div id="div1"></div>
 </body>
 </html>

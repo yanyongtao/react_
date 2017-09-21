@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/react.js" charset="utf-8"></script>
+    <script src="js/react-dom.js" charset="utf-8"></script>
+    <script src="js/browser.js" charset="utf-8"></script>
+    <script src="js/jquery.js" charset="utf-8"></script>
+    <style media="screen">
+        .box{
+            width: 200px;
+            height: 200px;
+            background: #ccc;
+            position: absolute;
+        }
+    </style>
+    <script type="text/babel">
+        class Drag extends React.Component {
+            constructor(...args) {
+                super(...args);
+                this.state=({
+                    x:0,
+                    y:0
+                })
+
+            }
+            fn(ev){
+                var disX=ev.pageX-this.state.x;
+                var disY=ev.pageY-this.state.y;
+                var this_=this
+                console.log(ev.pageX,ev.pageY);
+                document.onmousemove=function(e) {
+                    console.log(e.pageX);
+                    this_.setState({
+                        x:e.pageX-disX,
+                        y:e.pageY-disY
+                    })
+                }
+                document.onmouseup=function(){
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                };
+            }
+            render(){
+                return <div style={{left:this.state.x+'px',top:this.state.y+'px'}} className='box' onMouseDown={this.fn.bind(this)}></div>;
+            }
+        }
+        window.onload=function() {
+            ReactDOM.render(
+                <Drag/>,
+                $("yyt-view")[0]
+            )
+        }
+    </script>
+</head>
+<body>
+    <yyt-view></yyt-view>
+</body>
+</html>

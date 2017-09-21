@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/react.js" charset="utf-8"></script>
+    <script src="js/react-dom.js" charset="utf-8"></script>
+    <script src="js/browser.js" charset="utf-8"></script>
+    <script src="js/jquery.js" charset="utf-8"></script>
+    <script type="text/babel">
+        class TmpComp extends React.Component {
+            constructor(...args) {
+                super(...args);
+
+            }
+            fn1(){
+                alert("父级")
+            }
+            fn2(ev){
+                alert("子级")
+                ev.nativeEvent.stopImmediatePropagation();
+            }
+            render(){
+                return <div onClick={this.fn1.bind(this)}>
+                <div onClick={this.fn2.bind(this)}>111</div>
+                </div>
+            }
+        }
+        window.onload=function() {
+            ReactDOM.render(
+                <TmpComp/>,
+                $("yyt-view")[0]
+            )
+        }
+    </script>
+</head>
+<body>
+    <yyt-view></yyt-view>
+</body>
+</html>

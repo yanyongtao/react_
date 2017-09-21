@@ -1,0 +1,22 @@
+{
+  "name": "react_",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev":"browser-sync start --server --files *.*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yanyongtao/react_.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yanyongtao/react_/issues"
+  },
+  "homepage": "https://github.com/yanyongtao/react_#readme",
+  "dependencies": {
+    "browser-sync": "^2.18.13"
+  }
+}
